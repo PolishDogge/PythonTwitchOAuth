@@ -5,8 +5,8 @@ from time import time
 
 #################
 TOKEN_FILE = "oauth_tokens.json"
-client_id = "d0lxlcp9eeujxdzwzmf4r0ia54bdwv"
-client_secret = "ut4z0gzu9ly8rsw70tws380ohxx6wk"
+client_id = ""
+client_secret = ""
 redirect_uri = "http://localhost"
 #################
 
