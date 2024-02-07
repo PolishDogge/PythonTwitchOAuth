@@ -3,15 +3,21 @@ import json
 import requests
 from time import time
 
+#################
 TOKEN_FILE = "oauth_tokens.json"
+client_id = "d0lxlcp9eeujxdzwzmf4r0ia54bdwv"
+client_secret = "ut4z0gzu9ly8rsw70tws380ohxx6wk"
+redirect_uri = "http://localhost"
+#################
 
 class TwitchHandler:
+    global client_id, client_secret, redirect_uri
     @staticmethod
     def save_tokens(tokens):
         with open(TOKEN_FILE, "w") as file:
             json.dump(tokens, file)
-          
-    @staticmethod 
+
+    @staticmethod
     def load_tokens():
         try:
             with open(TOKEN_FILE, "r") as file:
@@ -44,22 +50,21 @@ class TwitchHandler:
 
     @staticmethod
     def generate_new_tokens():
-        client_id = ""
-        redirect_uri = "http://localhost"
 
         auth_url = f"https://id.twitch.tv/oauth2/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code&scope=chat:read&force_verify=true"
         print(auth_url)
         webbrowser.open(auth_url)
 
+        print('After giving access to your app, you will get a code in the link. Example: http://localhost/wGzjf09wSgbjsBM29z << {this is the code}')
         authorization_code = input("Enter the authorization code from the URL: ")
 
         token_url = "https://id.twitch.tv/oauth2/token"
         params = {
-            "client_id": client_id,
-            "client_secret": "",
+            "client_id": f"{client_id}",
+            "client_secret": f"{client_secret}",
             "code": authorization_code,
             "grant_type": "authorization_code",
-            "redirect_uri": redirect_uri,
+            "redirect_uri": f"{redirect_uri}",
         }
 
         response = requests.post(token_url, params=params)
@@ -82,8 +87,8 @@ class TwitchHandler:
         print('Refreshing token.')
         auth_url = "https://id.twitch.tv/oauth2/token"
         params = {
-            "client_id": "",
-            "client_secret": "",
+            "client_id": f"{client_id}",
+            "client_secret": f"{client_secret}",
             "refresh_token": refresh_token,
             "grant_type": "refresh_token",
         }
