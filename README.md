@@ -7,8 +7,7 @@ TwitchHandler is a Python class designed to simplify the process of obtaining an
 # Getting Started
 Clone the repository:
 ```
-git clone https://github.com/polishdogge/twitchHandler.git
-cd twitchHandler
+git clone https://github.com/PolishDogge/PythonTwitchOAuth.git
 ```
 Install the required dependencies:
 ```
